@@ -78,7 +78,9 @@ def flights_from_airports(airports, first_date, last_date):
     return df_flights
             
 first_flight = flights_from_airports(home_airport, trip1[0], trip1[1])
-    
+first_destination = first_flight[["destination", "departureTime"]]
+first_destination.loc[:,"departureTime"] = pd.to_datetime(first_destination.loc[:,"departureTime"], format='%y%m%d').dt.date
+first_destination.loc[:,"leavingTime"] = first_destination["departureTime"].copy()
 
 # first_flight_flights = [flight for airport_flights in first_flight_flights for flight in airport_flights]
 # destination = list(set([x.destination for x in first_flight_flights]))
